@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-const blogPosts =
-[
+
+
+export default function BlogDetailPage() {
+  const blogPosts = [
   {
     id: "1",
     title: "Eye Glasses",
@@ -162,9 +164,10 @@ const blogPosts =
     price: "$35"
   },
 ];
-
-export default function BlogDetailPage() {
+console.log(blogPosts)
   const params = useParams();
+  
+
   const blog = blogPosts.find((post) => post.id === params.id);
 
   if (!blog) {
@@ -193,18 +196,24 @@ export default function BlogDetailPage() {
 
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-pink-300">
+    <div className="max-w-3xl mx-auto p-6 bg-gray-300">
       {/* Blog Content */}
       <Image className=" rounded-lg mb-4" src={blog.image} alt={blog.title} width={300} height={300}/>
       <h1 className="text-2xl font-bold">{blog.title}</h1>
       <p className="text-gray-600 text-sm">{blog.date}</p>
+      <p className="text-gray-600 text-lg text-bold"> Glasses Price :{blog.price}</p>
       <p className="mt-4 text-gray-800">Stylish & Protective Eyewear for Every Occasion
       Discover the perfect blend of fashion and functionality with our premium collection of 
-      sunglasses and eyeglasses. Whether you're looking for UV protection, blue light 
-      filtering, or simply a stylish upgrade, our eyewear is designed to suit every need. 
+      sunglasses and eyeglasses. Whether you are looking for UV protection blue light 
+      filtering or simply a stylish upgrade our eyewear is designed to suit every need. 
       Elevate your look while ensuring maximum comfort and durability. Shop now and see the 
-      world in style!</p>
-
+      world in style</p>
+      <div className="flex  items-center gap-5">
+        <Link href={"/blogForm"}>
+      <button className="p-2 rounded bg-blue-500 text-white">Order Now</button>
+      </Link>
+      <button className="p-2 rounded bg-blue-500 text-white">Add To Cart</button>
+      </div>
      
 
       {/* Comments Section */}
@@ -240,7 +249,7 @@ export default function BlogDetailPage() {
             {relatedPosts.map((post) => (
               <Link key={post.id} href={`/blog/${post.id}`}>
                 <div className="p-4 border rounded-lg shadow hover:shadow-lg cursor-pointer">
-                  <img className="w-full h-40 object-cover rounded" src={post.image} alt={post.title} />
+                  <Image className=" object-cover rounded" src={post.image} alt={post.title}  width={200} height={40}/>
                   <h3 className="text-lg font-bold mt-2">{post.title}</h3>
                   <p className="text-gray-600 text-sm">{post.date}</p>
                 </div>
