@@ -164,10 +164,8 @@ export default function BlogDetailPage() {
     price: "$35"
   },
 ];
-console.log(blogPosts)
-  const params = useParams();
-  
 
+  const params = useParams();
   const blog = blogPosts.find((post) => post.id === params.id);
 
   if (!blog) {
@@ -192,8 +190,6 @@ console.log(blogPosts)
       setNewComment("");
     }
   };
-
-
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-300">
@@ -246,8 +242,8 @@ console.log(blogPosts)
         <div className="mt-8">
           <h2 className="text-xl font-semibold">Related Posts</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            {relatedPosts.map((post) => (
-              <Link key={post.id} href={`/blog/${post.id}`}>
+            {relatedPosts.map((post , index:number) => (
+              <Link key={index} href={`/blog/${post.id}`}>
                 <div className="p-4 border rounded-lg shadow hover:shadow-lg cursor-pointer">
                   <Image className=" object-cover rounded" src={post.image} alt={post.title}  width={200} height={40}/>
                   <h3 className="text-lg font-bold mt-2">{post.title}</h3>
